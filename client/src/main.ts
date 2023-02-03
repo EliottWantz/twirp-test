@@ -1,7 +1,7 @@
 import './style.css'
 import typescriptLogo from './typescript.svg'
 import { setupCounter } from './counter'
-import {UserServiceClientJSON} from '../rpc/user/service.twirp'
+import {UserServiceClientJSON, UserServiceClientProtobuf} from '../rpc/user/service.twirp'
 import { FetchRPC } from 'twirp-ts'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
@@ -24,6 +24,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
 setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
 
-export const rpcClient = new UserServiceClientJSON(FetchRPC({
+export const jsonClient = new UserServiceClientJSON(FetchRPC({
+  baseUrl: 'http://localhost:8080/twirp',
+}))
+export const protobufClient = new UserServiceClientProtobuf(FetchRPC({
   baseUrl: 'http://localhost:8080/twirp',
 }))

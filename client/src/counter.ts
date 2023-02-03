@@ -1,4 +1,4 @@
-import { rpcClient } from "./main"
+import { jsonClient, protobufClient } from "./main"
 
 export function setupCounter(element: HTMLButtonElement) {
   let counter = 0
@@ -8,7 +8,8 @@ export function setupCounter(element: HTMLButtonElement) {
   }
   element.addEventListener('click', () => {
     setCounter(counter + 1)
-    rpcClient.Ping({}).then(console.log)
+    jsonClient.Ping({}).then(console.log)
+    protobufClient.ListUsers({}).then(console.log)
   })
   setCounter(0)
 }
