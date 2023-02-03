@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package eliott;
+option go_package = "/rpc/user";
+
+service UserService {
+  rpc Ping(PingReq) returns (PingRes);
+  rpc CreateUser (CreateUserReq) returns (CreateUserRes);
+  rpc GetUserByID (GetUserByIDReq) returns (GetUserByIDRes);
+  rpc ListUsers (ListUsersReq) returns (ListUsersRes);
+}
+
+message PingReq {}
+message PingRes {
+  bool status = 1;
+}
+message User {
+  string id = 1;
+  string username = 2;
+  string password = 3;
+  string createdAt = 4;
+}
+message UserRes {
+  string id = 1;
+  string username = 2;
+  string createdAt = 3;
+}
+message CreateUserReq {
+  string username = 1;
+  string password = 2;
+}
+message CreateUserRes {
+  UserRes user = 1;
+}
+message GetUserByIDReq {
+  string id = 1;
+}
+message GetUserByIDRes {
+  User user = 1;
+}
+message ListUsersReq {}
+message ListUsersRes {
+  repeated User users = 1;
+}

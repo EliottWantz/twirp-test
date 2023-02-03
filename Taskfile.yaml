@@ -1,0 +1,15 @@
+# https://taskfile.dev
+
+version: "3"
+
+tasks:
+  dev:
+    cmds:
+      - go run .
+  protoc:
+    desc: Run protoc to generate a protobuf file
+    vars:
+      PROTO_FILE: rpc/user/service.proto
+      CLIENT_DIR: client
+    cmds:
+      - protoc --go_out=. --twirp_out=. --ts_proto_opt=esModuleInterop=true --ts_proto_out={{.CLIENT_DIR}} --twirp_ts_opt="ts_proto" --twirp_ts_out={{.CLIENT_DIR}} {{.PROTO_FILE}}
